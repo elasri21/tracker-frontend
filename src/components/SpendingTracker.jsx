@@ -62,6 +62,22 @@ const SpendingTracker = () => {
     setShowExpenseForm(false);
   };
 
+  // handle reset data
+  const handleReset = async () => {
+    if (!window.confirm("Are you sure you want to reset all data?")) return;
+
+    try {
+      await fetch(`${import.meta.env.VITE_API_BASE_URL}/data`, {
+        method: "DELETE",
+      });
+      // Reset local state
+      setFormData({ total: 0, budget: 0 });
+      setExpenses([]);
+    } catch (error) {
+      console.error("Failed to reset data:", error);
+    }
+  };
+
   return (
     <div className="container">
       <h1 className="heading">Spending Tracker</h1>
@@ -155,6 +171,9 @@ const SpendingTracker = () => {
               </li>
             ))}
           </ul>
+          <button className="button reset-button" onClick={handleReset}>
+            Start a new month
+          </button>
           <p className="total-expense">Total Expense Amount: ${totalExpenses.toFixed(2)}</p>
         </div>
       </div>
