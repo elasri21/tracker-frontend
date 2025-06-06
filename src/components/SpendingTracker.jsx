@@ -34,7 +34,7 @@ const SpendingTracker = () => {
 
     const newFormData = { total, budget };
 
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/data`, {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/formData`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newFormData),
